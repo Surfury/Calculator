@@ -8,7 +8,7 @@ const output=document.getElementById('output'),
     operator=document.querySelectorAll('.operator'),
     all=document.querySelectorAll('.number,.operator');
 
-let a,b,c,lastChar,operation;
+let a,b,lastChar,operation;
 backspaceKey.textContent='_<';
 output.value=' ';
 
