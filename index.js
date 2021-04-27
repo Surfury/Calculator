@@ -1,53 +1,54 @@
 'use strict';
-const output=document.getElementById('output'),
-    input=document.getElementById('input'),
-    ac=document.getElementById('ac'),
-    backspaceKey=document.getElementById("backspace"),
-    getResult=document.getElementById('total'),
-    numbers=document.querySelectorAll('.number'),
-    operator=document.querySelectorAll('.operator'),
-    all=document.querySelectorAll('.number,.operator');
+/*All HTML Elements varibles have a $ at the beginning*/
+const $output=document.getElementById('output'),
+    $input=document.getElementById('input'),
+    $ac=document.getElementById('ac'),
+    $backspaceKey=document.getElementById("backspace"),
+    $getResult=document.getElementById('total'),
+    $numbers=document.querySelectorAll('.number'),
+    $operator=document.querySelectorAll('.operator'),
+    $all=document.querySelectorAll('.number,.operator');
 
 let a,b,lastChar,operation;
-backspaceKey.textContent='_<';
-output.value=' ';
+$backspaceKey.textContent='_<';
+$output.value=' ';
 
-ac.addEventListener('click',clean);
-backspaceKey.addEventListener('click',backspace);
+$ac.addEventListener('click',clean);
+$backspaceKey.addEventListener('click',backspace);
 
-getResult.addEventListener('click',() => {
+$getResult.addEventListener('click',() => {
     b=input.value-'';
     if (output.textContent!==''&&input.value!=='') {
-    output.textContent=`${a}${operation}${b}`;
-    input.value=operate();
+    $output.textContent=`${a}${operation}${b}`;
+    $input.value=operate();
     }
 });
 
-operator.forEach(E => E.addEventListener('click',(e) => ReOp(e)));
-numbers.forEach(E => E.addEventListener('click',(e) => {
-    input.value+=e.target.textContent;
-    lastChar=e.target.textContent;
+$operator.forEach(E => E.addEventListener('click',(e) => ReOp(e)));
+$numbers.forEach(E => E.addEventListener('click',(e) => {
+    $input.value+=e.target.textContent;
+    $lastChar=e.target.textContent;
 }));
-input.addEventListener('keypress',(e) => {
+$input.addEventListener('keypress',(e) => {
     if (!e.key.match(/[+-/*^]|\d/)) {
         e.preventDefault();
     }
 });
 function ReOp(e) {
-    if (output.textContent!==''&&input.value!=='') {
-        getResult.dispatchEvent(new Event('click'));
+    if ($output.textContent!==''&&input.value!=='') {
+        $getResult.dispatchEvent(new Event('click'));
         a=input.value-'';
         console.log(a);
     }
-    operation=e.target.textContent;
+    $operation=e.target.textContent;
     if (a===undefined) {
         a=input.value-'';
     } else {
-        b=input.value-'';
-        input.value=operate();
+        b=$input.value-'';
+        $input.value=operate();
     }
-    output.textContent=`${a}${operation}`;
-    input.value=null;
+    $output.textContent=`${a}${operation}`;
+    $input.value=null;
 }
 function operate() {
     switch (operation) {
@@ -61,11 +62,11 @@ function operate() {
     }
 }
 function backspace() {
-    input.value=input.value.slice(0,- 1);
+    $input.value=$input.value.slice(0,- 1);
 }
 function clean() {
-    input.value='';
-    output.textContent='';
+    $input.value='';
+    $output.textContent='';
     a=undefined;
     b=undefined;
 }
